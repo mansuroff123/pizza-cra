@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import './index.css';
+import "./index.css";
 
 const pizzaData = [
   {
@@ -60,30 +60,40 @@ function App() {
 function Header() {
   return (
     <header className="header">
-      <h1>Fast React Pitsa Co.</h1>;
+      <h1>Fast React Pitsa Co.</h1>
     </header>
-  )
+  );
 }
 
 function Menu() {
   return (
     <main className="menu">
       <h2>Our menu</h2>
-      <Pizza name="Pizza Spinaci" ingredients="Tomato, mozarella, spinach, and ricotta cheese"/>
+
+      <ul className="pizzas">
+        {pizzaData.map((pizza) => 
+          <Pizza pizzaObj={pizza} key={pizza.name}/>
+        )}
+      </ul>
+
+      {/* <Pizza
+        name="Pizza Spinaci"
+        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
+      /> */}
     </main>
   );
 }
 
 function Pizza(props) {
   return (
-    <div className="pizza">
-      <img src="pizzas/spinaci.jpg" />
+    <li className="pizza">
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name}/>
       <div>
-        <h3>{props.name}</h3>
-        <p>{props.ingredients}</p>
-        <span>12</span>
+        <h3>{props.pizzaObj.name}</h3>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>{props.pizzaObj.price}</span>
       </div>
-    </div>
+    </li>
   );
 }
 
@@ -92,7 +102,7 @@ function Footer() {
   const openHour = 8;
   const closeHour = 22;
   const isOpen = hour >= openHour && hour <= closeHour;
-  console.log(isOpen)
+  console.log(isOpen);
 
   // if (hour >= openHour && hour <= closeHour) alert("We're currently open!");
   // else alert("Sorry we're closed");
@@ -102,8 +112,6 @@ function Footer() {
     </footer>
   );
 }
-
-
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
